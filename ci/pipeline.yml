@@ -81,6 +81,6 @@ jobs:
       - put: k8s
         params:
 #          kubectl: delete pods -l app=demo-cicd
-          kubectl: apply -f kubeResources.yml
-#          wait_until_ready: 300
+          kubectl: apply -f hello_hapi/kubeResource.yml
+          wait_until_ready: 300
 #          kubeconfig_file: ./.kube/config
