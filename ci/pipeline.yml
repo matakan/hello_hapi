@@ -13,7 +13,6 @@ resource_types:
       tag: "1.12"
 
 
-
 resources:
   - name: hello_hapi
     type: git
@@ -42,41 +41,47 @@ resources:
 
 
 jobs:
-  - name: Install dependencies
+  - name: Install_dependencies
     plan:
       - get: hello_hapi
         trigger: true
       - get: dependency-cache
 
-  - name: Run tests
+  - name: Run_tests
     plan:
       - get: hello_hapi
         trigger: true
-        passed: [Install dependencies]
+        passed: [Install_dependencies]
       - get: dependency-cache
-        passed: [Install dependencies]
+        passed: [Install_dependencies]
       - task: run the test suite
         file: hello_hapi/ci/tasks/run_tests.yml
 
-  - name: "Docker-Build"
+  - name: Docker_Build
     public: false
     plan:
       - get: hello_hapi
         trigger: true
-        passed: [Run tests]
+        passed: [Run_tests]
       - get: dependency-cache
-        passed: [Run tests]
+        passed: [Run_tests]
       - put: docker-push
         params:
           build: hello_hapi
 
-  - name: "Deploy Application"
+  - name: Security_scan
+    plan:
+      - get: hello_hapi
+      - task: run security scan
+        file: hello_hapi/ci/tasks/run_security_scan.yml
+
+  - name: Deploy_Application
     public: false
     plan:
       - get: docker-push
         trigger: true
         passed:
-          - "Docker-Build"
+          - "Docker_Build"
       - get: hello_hapi
       - put: k8s
         params:
