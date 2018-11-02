@@ -72,6 +72,7 @@ jobs:
   - name: Security_scan
     plan:
       - get: hello_hapi
+        trigger: true
         passed: [Docker_Build]
       - task: run security scan
         file: hello_hapi/ci/tasks/run_security_scan.yml
@@ -80,6 +81,7 @@ jobs:
     public: false
     plan:
       - get: hello_hapi
+        trigger: true
         passed:
           - "Security_scan"
       - put: k8s
