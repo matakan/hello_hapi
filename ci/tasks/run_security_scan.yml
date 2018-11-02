@@ -11,6 +11,7 @@ image_resource:
 
 inputs:
   - name: hello_hapi
+  - name: docker-push
 
 run:
   path: hello_hapi/ci/scripts/run_security_scan.sh
