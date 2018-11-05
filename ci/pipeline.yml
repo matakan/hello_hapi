@@ -139,10 +139,11 @@ jobs:
               - |
                 cd hello_hapi
                 helm create hello_hapi_helmpkg
+                ls
                 cp kubedir/service.yaml hello_hapi_helmpkg/templates
                 cp kubedir/deployment.yaml hello_hapi_helmpkg/templates
                 rm hello_hapi_helmpkg/templates/ingress.yaml
-		helm package hello_hapi_helmpkg
+                helm package hello_hapi_helmpkg
                 curl --data-binary "@hello_hapi_helmpkg-0.1.0.tgz" http://52.151.72.37:8090/api/charts
 
   - name: Deploy_Application
@@ -151,7 +152,7 @@ jobs:
       - get: hello_hapi
         trigger: true
         passed:
-          - "Docker_Push"
+          - "ChartRepo_Push"
       - put: k8s
         params:
 #          kubectl: delete pods -l app=demo-cicd
