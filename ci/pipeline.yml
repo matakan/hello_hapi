@@ -117,6 +117,34 @@ jobs:
         params:
           build: hello_hapi
 
+  - name: ChartRepo_Push
+    plan:
+      - get: hello_hapi
+        trigger: true
+        passed: [Docker_Push]
+      - task: run security scan
+        privileged: true
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: lachlanevenson/k8s-helm
+          inputs:
+            - name: hello_hapi
+          run:
+            path: sh
+            args:
+              - -exc
+              - |
+                cd hello_hapi
+                helm create hello_hapi_helmpkg
+                cp kubedir/service.yaml hello_hapi_helmpkg/templates
+                cp kubedir/deployment.yaml hello_hapi_helmpkg/templates
+                rm hello_hapi_helmpkg/templates/ingress.yaml
+		helm package hello_hapi_helmpkg
+                curl --data-binary "@hello_hapi_helmpkg-0.1.0.tgz" http://52.151.72.37:8090/api/charts
+
   - name: Deploy_Application
     public: false
     plan:
