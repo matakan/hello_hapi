@@ -3,9 +3,9 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   namespace: default
-  name: demo-cicd
+  name: {{.Release.Name}}-demo-cicd
   labels:
-    app: demo-cicd
+    app: {{.Release.Name}}-demo-cicd
 spec:
   replicas: 3
   revisionHistoryLimit: 2
@@ -13,9 +13,9 @@ spec:
     metadata:
       namespace: default
       labels:
-        app: demo-cicd
+        app: {{.Release.Name}}-demo-cicd
     spec:
       containers:
-        - name: demo-cicd
+        - name: {{.Release.Name}}-demo-cicd
           image: mustafaatakan/demo-cicd:latest
           imagePullPolicy: Always
