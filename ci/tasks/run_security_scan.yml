@@ -10,8 +10,8 @@ image_resource:
     password: ((mustafaatakan-passwd))
 
 inputs:
-  - name: hello_hapi
+  - name: github.com_matakan_hello_hapi
   - name: docker-push
 
 run:
-  path: hello_hapi/ci/scripts/run_security_scan.sh
+  path: github.com_matakan_hello_hapi/ci/scripts/run_security_scan.sh
