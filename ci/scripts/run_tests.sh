@@ -2,5 +2,5 @@
 
 set -e -u -x
 
-mv dependency-cache/node_modules hello_hapi
-cd hello_hapi && npm test
+mv dependency-cache/node_modules github.com_matakan_hello_hapi
+cd github.com_matakan_hello_hapi && npm test

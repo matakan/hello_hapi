@@ -8,8 +8,8 @@ image_resource:
     tag: latest
 
 inputs:
-  - name: hello_hapi
+  - name: github.com_matakan_hello_hapi
   - name: dependency-cache
 
 run:
-  path: hello_hapi/ci/scripts/run_tests.sh
+  path: github.com_matakan_hello_hapi/ci/scripts/run_tests.sh
