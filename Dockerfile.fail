@@ -1,6 +1,7 @@
 # use the latest node LTS release
 #FROM warroommaster.azurecr.io/node:9-slim
 FROM node:carbon
+RUN mkdir /usr/src/app
 RUN chmod -R 777 /usr/src
 RUN usermod -a -G root node
 
