@@ -1,9 +1,10 @@
 # use the latest node LTS release
 #FROM warroommaster.azurecr.io/node:9-slim
 FROM node:carbon
-WORKDIR /usr/src/app
+RUN chmod -R 777 /usr/src
 
 USER node
+WORKDIR /usr/src/app
 
 # copy package.json and package-lock.json and install packages. we do this
 # separate from the application code to better use docker's caching
