@@ -2,7 +2,7 @@
 #FROM warroommaster.azurecr.io/node:9-slim
 FROM node:carbon
 RUN chmod -R 777 /usr/src
-usermod -a -G root node
+RUN usermod -a -G root node
 
 USER node
 WORKDIR /usr/src/app
