@@ -1,5 +1,5 @@
 # use the latest node LTS release
-FROM node:carbon
+FROM warroommaster.azurecr.io/node:9-slim
 WORKDIR /usr/src/app
 
 RUN id
